@@ -1,0 +1,92 @@
+function setup() {
+  createCanvas(800, 600);
+}
+  
+  function draw() {
+  // Background dengan gradasi
+  for (let i = 0; i < height; i++) {
+    let inter = map(i, 0, height, 0, 1);
+    let c = lerpColor(color(135, 206, 235), color(255, 255, 255), inter);
+    stroke(c);
+    line(0, i, width, i);
+  }
+    
+    // Efek sinar matahari
+  for (let i = 0; i < 5; i++) {
+    fill(255, 223, 0, 50 - i * 10); // Warna kuning dengan opacity berkurang
+    noStroke();
+    ellipse(width / 2, 100, 150 + i * 50, 150 + i * 50); // Lingkaran sinar yang semakin besar
+  }
+
+
+  // Matahari di tengah
+  fill(255, 223, 0);
+  noStroke();
+  ellipse(width / 2, 100, 100, 100);
+
+  // Gunung kiri
+  fill(100, 155, 100);
+  triangle(100, 400, 250, 200, 400, 400);
+  fill(255); // Salju di puncak gunung kiri
+  triangle(250, 200, 290, 250, 210, 250);
+
+  // Gunung kanan
+  fill(100, 155, 100);
+  triangle(400, 400, 550, 200, 700, 400);
+  fill(255); // Salju di puncak gunung kanan
+  triangle(550, 200, 590, 250, 510, 250);
+
+  // Sawah di sekitar jalan
+  fill(34, 139, 34); // Warna hijau untuk sawah
+  noStroke();
+  rect(0, 400, 800, 200); // Lahan hijau untuk sawah
+
+  // Garis sawah horizontal di sekitar jalan
+  stroke(0, 100, 0);
+  strokeWeight(2);
+  for (let i = 0; i < 10; i++) {
+    let y = map(i, 0, 10, 600, 400);
+    line(0, y, 350, y); // Garis sawah di kiri jalan
+    line(450, y, 800, y); // Garis sawah di kanan jalan
+  }
+
+  // Jalan dengan perspektif
+  fill(169, 169, 169);
+  beginShape();
+  vertex(350, 600); // titik kiri bawah
+  vertex(450, 600); // titik kanan bawah
+  vertex(430, 400); // titik kanan atas (lebih kecil untuk efek perspektif)
+  vertex(370, 400); // titik kiri atas (lebih kecil untuk efek perspektif)
+  endShape(CLOSE);
+  
+  // Garis jalan putus-putus dengan perspektif
+  stroke(255);
+  strokeWeight(2);
+  let numLines = 8;
+  for (let i = 0; i < numLines; i++) {
+    let y = map(i, 0, numLines, 600, 400);
+    let lineWidth = map(i, 0, numLines, 30, 10);
+    line(400 - lineWidth / 2, y, 400 + lineWidth / 2, y);
+  }
+
+  // Awan
+  fill(255);
+  noStroke();
+  ellipse(200, 100, 80, 50);
+  ellipse(250, 100, 80, 50);
+  ellipse(230, 80, 80, 50);
+  
+  ellipse(500, 120, 80, 50);
+  ellipse(550, 120, 80, 50);
+  ellipse(530, 100, 80, 50);
+
+  // Burung
+  noFill();
+  stroke(0);
+  strokeWeight(2);
+  arc(100, 200, 30, 30, PI + QUARTER_PI, TWO_PI);
+  arc(130, 200, 30, 30, PI, PI + HALF_PI);
+  
+  arc(150, 250, 30, 30, PI + QUARTER_PI, TWO_PI);
+  arc(180, 250, 30, 30, PI, PI + HALF_PI);
+}
